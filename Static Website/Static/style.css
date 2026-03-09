@@ -1,0 +1,283 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f0f0;
+    margin: 0;
+    padding: 20px;
+    
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: #91728f;
+    border-radius: 25px;
+    width: 90%;
+    height: 0px;
+}
+
+.logo h2 {
+    color: white;
+    margin: 0;
+    font-size: 18px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px; 
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.nav-links a:hover {
+    color: #db83af;
+}
+
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+    }
+}
+
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 60px;
+    background-color: #8e4b8b; 
+    color: white;
+    margin-top: 20px;
+    border-radius: 15px;
+    height: 400px;
+}
+
+
+.hero-text {
+    width: 50%;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+
+.hero-btn {
+    background-color: white;
+    color: #6d526b;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    background-color: #3a3434;
+}
+
+
+.hero-image {
+    width: 32%;
+    
+}
+
+.hero-image img {
+    width: 65%;
+    height: 80%;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .hero-text,
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 28px;
+    }
+}
+
+
+
+.products {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; 
+    padding: 20px;
+}
+
+.container {
+    flex: 1;
+    text-align: center;
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.product-name {
+    font-size: medium;
+    margin-top: 10px;
+}
+
+h2 {
+    color: black;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+h3 {
+    color: black;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@media (max-width: 768px) {
+    .products {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        width: 100%;
+    }
+}
+
+footer {
+    background-color: #ecd9ec;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 25px;
+}
+
+
+.about-section {
+    padding: 60px 80px;
+}
+
+.about-section h3 {
+    font-size: 28px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+
+.about-content {
+    display: flex;
+    gap: 30px; 
+}
+
+
+.about-text {
+    flex: 1;
+    border: 2px solid #8e6f8f;  
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f4fa;
+}
+
+.about-text p {
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-section {
+        padding: 40px 20px;
+    }
+}
+
+
+.contact-section {
+    padding: 60px 80px;
+}
+
+.contact-section h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+
+.contact-content {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid #8e6f8f;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #f9f4fa;
+}
+
+.contact-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.contact-content ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.contact-content li {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+
+    .contact-section {
+        padding: 40px 20px;
+    }
+
+    .contact-content {
+        padding: 20px;
+    }
+
+    .contact-section h3 {
+        font-size: 24px;
+    }
+}
+
