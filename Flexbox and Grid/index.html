@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Loaf bakery </title>
+  <style>
+    /* ---------- RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fef9f2;  
+      color: #2e241f;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ---------- FLEXBOX FOR GLOBAL LAYOUT ---------- */
+    .bakery-header {
+      background: #4a2c1a;  /* deep chocolate brown */
+      color: #fae1c3;
+      padding: 1rem 2rem;
+      display: flex;                /* flex for navbar alignment */
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    }
+
+    .logo h1 {
+      font-size: 1.9rem;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: #fbd8b4;
+    }
+
+    .logo p {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;                /* flex again for inline nav */
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #f8e2cc;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: #f8c794;
+    }
+
+    /* main takes remaining height (flex:1) */
+    .main-content {
+      flex: 1;
+      max-width: 1300px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .bakery-footer {
+      background: #2e241f;
+      color: #dbc6b0;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* ---------- FLEXBOX HERO ---------- */
+    .hero-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      background: #fff5e8;
+      border-radius: 40px;
+      padding: 2.5rem 3rem;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 10px 20px rgba(106, 64, 33, 0.08);
+    }
+
+    .hero-text {
+      flex: 2 1 300px;
+    }
+
+    .hero-text h2 {
+      font-size: 2.6rem;
+      font-weight: 550;
+      color: #4a2c1a;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #5f4a38;
+      max-width: 550px;
+      margin: 1rem 0 1.8rem 0;
+    }
+
+    .hero-btn {
+      background: #a75e36;
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: default;
+      display: inline-block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .hero-image {
+      flex: 1 1 240px;
+      background: #e9cfb2;
+      height: 220px;
+      border-radius: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      box-shadow: 0 12px 18px -8px rgba(90, 55, 30, 0.2);
+    }
+
+    /* ---------- PASTRY GRID  ---------- */
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 450;
+      margin: 2.8rem 0 1.8rem 0;
+      color: #3a281e;
+      border-left: 10px solid #b47b56;
+      padding-left: 1.6rem;
+    }
+
+    .pastry-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      margin-bottom: 3rem;
+    }
+
+    /* product card —  bakery item */
+    .pastry-card {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 16px 28px -12px rgba(70, 40, 20, 0.2);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pastry-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 34px -12px #5e3e2bb3;
+    }
+
+    .card-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 1rem;
+      color: white;
+      font-weight: 600;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* real images: using unsplash / food imagery (placeholders with real context) */
+    .croissant {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&auto=format&fit=crop');
+    }
+    .sourdough {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1585478259715-4d0b0d2e9a4e?w=400&auto=format&fit=crop');
+    }
+    .cinnamon {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&auto=format&fit=crop');
+    }
+    .chocolate {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=400&auto=format&fit=crop');
+    }
+    .baguette {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&auto=format&fit=crop');
+    }
+    .brownie {
+      background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&auto=format&fit=crop');
+    }
+
+    .card-content {
+      padding: 1.8rem 1.5rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-content h3 {
+      font-size: 1.8rem;
+      font-weight: 550;
+      color: #2c1c10;
+      margin-bottom: 0.4rem;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #a75e36;
+      margin: 0.5rem 0 0.8rem 0;
+    }
+
+    .card-footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+      border-top: 2px dotted #ecd5bc;
+      padding-top: 1rem;
+    }
+
+    .order-btn {
+      background: none;
+      border: 2px solid #b47b56;
+      color: #4a2c1a;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: default;
+    }
+
+    .rating {
+      background: #faead7;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- STAFF PICKS — FLEX ROW ---------- */
+    .staff-section {
+      margin: 4rem 0;
+    }
+
+    .staff-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      background: #fef1e2;
+      border-radius: 60px;
+      padding: 2.5rem 2rem;
+    }
+
+    .staff-card {
+      flex: 1 1 180px;
+      background: white;
+      border-radius: 40px;
+      padding: 1.8rem 0.8rem;
+      text-align: center;
+      box-shadow: 0 10px 15px -8px #b4a08d;
+    }
+
+    .staff-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #e1c6ab;
+    }
+
+    .staff-card h4 {
+      margin: 1rem 0 0.3rem;
+      color: #3f2c1b;
+    }
+
+    /* ---------- FOOTER INFO  ---------- */
+    .footer-flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+
+    .social {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    /* ---------- RESPONSIVE TWEAKS ---------- */
+    @media screen and (max-width: 750px) {
+      .bakery-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      .hero-flex {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        justify-content: center;
+      }
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .main-content {
+        padding: 0 1rem;
+      }
+      .hero-text h2 {
+        font-size: 2rem;
+      }
+      .card-footer-flex {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+      .footer-flex {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    
+  </style>
+</head>
+<body>
+  <header class="bakery-header">
+    <div class="logo">
+      <h1>🥖 Daily Loaf</h1>
+      <p>bakery · since 1987</p>
+    </div>
+    <nav class="nav-links">
+      <a href="#">bread</a>
+      <a href="#">pastries</a>
+      <a href="#">cakes</a>
+      <a href="#">catering</a>
+      <a href="#">story</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <!-- FLEXBOX HERO:  intro  -->
+    <section class="hero-flex">
+      <div class="hero-text">
+        <h2>Real bread, <br>Real butter.</h2>
+        <p>sourdough · croissant · cinnamon rolls — baked fresh since 4am. our flour is local, our butter is european.</p>
+        <span class="hero-btn">📞 order ahead →</span>
+      </div>
+      <div class="hero-image">
+        🥐🥖🍞
+      </div>
+    </section>
+
+    <!-- CSS GRID: our best selling pastries -->
+    <section>
+      <h2 class="section-title">🥨 today's bake</h2>
+      <div class="pastry-grid">
+        <!-- croissant -->
+        <article class="pastry-card">
+          <div class="card-img croissant"></div>
+          <div class="card-content">
+            <h3>almond croissant</h3>
+            <p>flaky, frangipane, sliced almonds</p>
+            <div class="price">$4.50</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 4.9 (112)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+        <!-- sourdough -->
+        <article class="pastry-card">
+          <div class="card-img sourdough"></div>
+          <div class="card-content">
+            <h3>country sourdough</h3>
+            <p>25yr starter, dark crust, open crumb</p>
+            <div class="price">$7.90</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 5.0 (88)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+        <!-- cinnamon roll -->
+        <article class="pastry-card">
+          <div class="card-img cinnamon"></div>
+          <div class="card-content">
+            <h3>cinnamon roll</h3>
+            <p>cream cheese glaze, pecans</p>
+            <div class="price">$4.25</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 4.8 (204)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+        <!-- chocolate bread -->
+        <article class="pastry-card">
+          <div class="card-img chocolate"></div>
+          <div class="card-content">
+            <h3>chocolate brioche</h3>
+            <p>pearl sugar, valrhona chunks</p>
+            <div class="price">$5.20</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 4.7 (67)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+        <!-- baguette -->
+        <article class="pastry-card">
+          <div class="card-img baguette"></div>
+          <div class="card-content">
+            <h3>traditional baguette</h3>
+            <p>crackly crust, unbromated flour</p>
+            <div class="price">$3.80</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 4.9 (156)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+        <!-- brownie -->
+        <article class="pastry-card">
+          <div class="card-img brownie"></div>
+          <div class="card-content">
+            <h3>espresso brownie</h3>
+            <p>dark chocolate, sea salt, walnuts</p>
+            <div class="price">$3.95</div>
+            <div class="card-footer-flex">
+              <span class="rating">★ 4.8 (93)</span>
+              <span class="order-btn">add to basket</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="staff-section">
+      <h2 class="section-title" style="border-left-color: #c89f70;">🍞 meet the bakers</h2>
+      <div class="staff-flex">
+        <!-- staff card uses real unsplash portraits -->
+        <div class="staff-card">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop" alt="head baker" loading="lazy">
+          <h4>miguel ortega</h4>
+          <p>head baker · 14y</p>
+        </div>
+        <div class="staff-card">
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop" alt="pastry chef" loading="lazy">
+          <h4>claire dubois</h4>
+          <p>pastry · lamination</p>
+        </div>
+        <div class="staff-card">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&h=150&fit=crop" alt="sourdough specialist" loading="lazy">
+          <h4>james wu</h4>
+          <p>sourdough & fermentation</p>
+        </div>
+        <div class="staff-card">
+          <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&h=150&fit=crop" alt="cake decorator" loading="lazy">
+          <h4>zuri okonkwo</h4>
+          <p>cakes & viennoiserie</p>
+        </div>
+      </div>
+    </section>
+
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; background: #eddac8; padding: 1.5rem; border-radius: 60px; margin: 2rem 0;">
+      <span>🥖 Baking is an art</span>
+      <span>🍰 Baking is creativity</span>
+      <span>🥐 Baking is passion</span>
+    </div>
+  </main>
+
+  <footer class="bakery-footer">
+    <div class="footer-flex">
+      <span>© daily loaf bakery 2026</span>
+      <span>📍 221 flour street, portland</span>
+      <div class="social">
+        <span>📸 insta</span>
+        <span>🍞 tiktok</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
